@@ -1,0 +1,19 @@
+.signup {
+    width: 70vw;
+    margin: auto;
+    display: flex;
+    position: relative;
+    top: 14vh;
+    height: 65vh;
+    border: 1px solid;
+    &__left,
+    &__right {
+        width: 50%;
+        height: 100%;
+        padding: 1rem;
+    }
+    &__left {
+        background-image: url("https://i.pinimg.com/736x/58/3c/9d/583c9d93c0067b7862be68c2a21a80f7.jpg");
+        background-size: 100%;
+    }
+}
