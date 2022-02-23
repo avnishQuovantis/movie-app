@@ -1,0 +1,179 @@
+const userModel = require("../database/userModel")
+const { moreThanRating, lessThanRating } = require("./helperFn")
+const data = require("../data")
+function searchItem(req, res, next) {
+    try {
+        let { searchItem } = req.body
+        let items = data.filter(obj => {
+            return obj["Title"].toLowerCase().includes(searchItem.toLowerCase())
+        })
+        console.log(items);
+        res.status(200).json({ data: items })
+    } catch (err) {
+        res.status(500).json({ data: null, message: err.message })
+    }
+
+}
+
+function catagoryItems(req, res) {
+    try {
+        let { id } = req.params
+        let item = data.filter(obj => {
+            return obj.type == id
+        })
+
+        // console.log("catagory", item);
+        res.status(200).json({ data: item, message: "item is found" })
+    } catch (err) {
+        res.status(500).json({ data: null, message: err.message })
+    }
+}
+function catagoryGenre(req, res) {
+    try {
+        let { id } = req.params
+        console.log(id);
+        let newData = data.filter(obj => {
+            return obj['Genre'].toLowerCase().includes(id)
+        })
+        res.status(200).json({ data: newData })
+    } catch (err) {
+
+    }
+}
+
+function moviesSeriesHome(req, res) {
+    let { id } = req.params;
+    console.log(id);
+    id = id.toLowerCase()
+    let newData = { 'poster': [], 'latest': [], 'top-rated': [], 'popular': [] }
+    for (let i = 0; i < data.length; i++) {
+        if (data[i]['Type'] == id && newData['poster'].length < 4) {
+            newData['poster'].push(data[i])
+        }
+        if (data[i]['Year'] > 2020 && data[i]['Type'] == id) {
+            newData['latest'].push(data[i])
+        }
+        if (data[i]['imdbRating'] >= 7.5 && data[i]['Type'] == id) {
+            newData['top-rated'].push(data[i])
+        }
+        if (data[i]['Metascore'] >= 75 && data[i]['Type'] == id) {
+            newData['popular'].push(data[i])
+        }
+    }
+    console.log(newData);
+    res.status(200).json({ data: newData })
+}
+
+function moviesCatagories(req, res) {
+
+}
+function getItemDetails(req, res, next) {
+    try {
+        let { id } = req.params
+        console.log(id);
+        let item = data.find(obj => {
+            return id == obj.id
+        })
+        console.log(item);
+        if (item) {
+            console.log(item);
+            res.status(200).json({ data: item, message: "item is found" })
+        } else {
+            console.log(item);
+            res.status(404).json({ data: null, message: "item not found" })
+        }
+    } catch (err) {
+        res.status(500).json({ item: null, message: err.message })
+    }
+}
+
+
+function homeItems(req, res) {
+    let newData = {}
+    newData["latest"] = moreThanRating(data, "Year", 2019)
+    newData["topRated"] = moreThanRating(data, 'imdbRating', 8)
+    newData['poster'] = []
+    newData['poster'].push(newData['latest'][0], newData['topRated'][0])
+
+    res.json({ data: newData })
+}
+
+
+function latestItems(req, res) {
+    let newData = data.filter(obj => {
+        return obj['Year'] >= 2019
+    })
+    res.json({ data: newData })
+}
+function catagories(req, res) {
+    let newData = [{ name: 'Action', image: "https://staticg.sportskeeda.com/editor/2019/03/cedbb-15534102082658-800.jpg" }, { name: 'adventure', image: "https://m.media-amazon.com/images/M/MV5BNDE1MGRlNTQtZjc4ZC00MTI0LWEwY2MtODk1YTM2NmFmYTNmXkEyXkFqcGdeQXVyODk4OTc3MTY@._V1_.jpg" },
+    { name: 'Fantasy', image: "https://fandomwire.com/wp-content/uploads/2019/11/Top-Ten-Fantasy-Thumb.jpg" },
+    { name: 'Drama', image: "https://i.pinimg.com/736x/5b/21/38/5b2138635aa6c8a73c790e255a8cac2b--joan-allen-drama-series.jpg" },
+    { name: 'Comedy', image: "https://cdn.europosters.eu/image/750/posters/friends-milkshake-i21739.jpg" },
+    { name: "Thriller", image: "https://i.pinimg.com/736x/26/10/83/261083cd1496ba590f7ace2c39b3d420.jpg" },
+    { name: "Horror", image: "https://www.femalefirst.co.uk/image-library/port/1000/p/poltergeist-feature-poster.jpg" },
+    { name: "Romance", image: "https://i.pinimg.com/236x/cc/0e/0a/cc0e0a8601671c81c55ad9138c81ea62--the-notebook--watch-the-notebook.jpg" },
+    { name: "Sci-fi", image: "https://m.media-amazon.com/images/M/MV5BMjI3Nzg0MTM5NF5BMl5BanBnXkFtZTgwOTE2MTgwNTM@._V1_.jpg" }]
+
+    res.json({ data: newData })
+}
+
+function Trend(req, res) {
+    let { id } = req.params;
+    id = id.toLowerCase()
+    let newData = {}
+    let poster = "https://www.comingsoon.net/assets/uploads/2019/12/posters.jpg"
+    if (id == 'latest') {
+        newData = moreThanRating(data, 'Year', 2020);
+    } else if (id == 'top-rated') {
+        newData = moreThanRating(data, 'imdbRating', 7.5)
+    }
+    res.json({ data: newData, poster })
+}
+
+async function addWatchList(req, res) {
+    const { id, watchlist } = req.body
+    console.log('inside wathclist ');
+    try {
+        await userModel.findByIdAndUpdate(id, { list: { watchlist: watchlist } })
+        let watchlistItems = await userModel.findById(id)
+        console.log("watchlist items after updater ", watchlistItems['list']);
+        res.status(200).json({ watchlist: watchlistItems.list })
+    } catch (err) {
+        console.log(err.message);
+        res.status(500).json({ error: err.message })
+
+    }
+
+}
+async function getWatchlist(req, res) {
+    const { id } = req.params
+    console.log(id);
+    try {
+
+        const list = await userModel.findById(id).select("list")
+        console.log(list);
+        res.status(200).json({ data: list })
+
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ data: null })
+    }
+
+}
+async function deleteFromWatchList(req, res) {
+    const { id, watchlist } = req.body;
+
+    console.log(id);
+    try {
+        console.log(watchlist);
+        await userModel.findByIdAndUpdate(id, { "list": { "watchlist": watchlist } })
+        const newWatchList = await userModel.findById(id).select("list")
+        console.log(newWatchList)
+        res.status(200).json({ data: newWatchList })
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+module.exports = { searchItem, getItemDetails, deleteFromWatchList, getWatchlist, catagoryItems, Trend, moviesSeriesHome, homeItems, addWatchList, latestItems, catagories, catagoryGenre }
