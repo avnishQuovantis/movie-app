@@ -1,3 +1,4 @@
+@import "../../scss/abstract/mixins";
 .catagories {
     width: 100vw;
     min-height: 91vh;
@@ -14,11 +15,26 @@
         background-color: rgba(0, 0, 0, 0.418);
         padding: 1rem;
         border-radius: 1.5rem;
+        @include respond(tab-port){
+            width :90%;
+        }
+        @include respond(phone){
+            width:100%;
+        }
         & > h3 {
             text-align: center;
             color: whitesmoke;
             font-weight: 200;
             font-size: 2.5rem;
+            @include respond(tab-land){
+                font-size:2rem;
+            }
+            @include respond(tab-port){
+                font-size:1.5rem;
+            }
+            @include respond(phone){
+                font-size:1rem;
+            }
         }
         &_group {
             width: 100%;
@@ -36,6 +52,13 @@
                 background-blend-mode: color-burn;
                 position: relative;
                 transition: all 0.2s;
+              
+                @include respond(tab-port){
+                    height:12hv;
+                }
+                @include respond(phone){
+                    height:10vh
+                }
                 &-title {
                     position: absolute;
                     color: white;
@@ -43,6 +66,16 @@
                     top: 50%;
                     left: 50%;
                     transform: translate(-50%, -50%);
+                    @include respond(tab-land){
+                        font-size:1.2rem
+                    }
+                    @include respond(tab-port){
+                        font-size:0.9rem;
+                    }
+                    @include respond(phone){
+
+                        font-size:0.7rem;
+                    }
                 }
                 &:hover {
                     transform: scale(1.04);

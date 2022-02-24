@@ -1,4 +1,5 @@
 @import "../scss/abstract/mixins";
+
 .home {
     width: 100vw;
     background-color: black;
@@ -7,7 +8,7 @@
     padding-bottom: 1rem;
     position: relative;
     top: 9vh;
-    // height:100vh
+    
     &__poster {
         width: 95%;
         margin: auto;
@@ -16,6 +17,10 @@
         position: relative;
        
         transition: all 0.2s;
+        @include respond(phone){
+            height:70vw;
+            min-height:35vh;
+        }
         &:hover {
             transform: scale(1.02);
             filter: brightness(110%);
@@ -37,10 +42,23 @@
             width: 40%;
             text-align: center;
             transition: all 0.2s;
-
+            @include respond(phone){
+                width:70%
+            }
+            & *{
+                @include respond(phone){
+                    font-size:0.4rem;
+                }
+            }
+            & >h1{
+                @include respond(phone){
+                    font-size:0.6rem
+                }
+            }
             &__type {
                 color: lightgoldenrodyellow;
                 font-size: 0.9rem;
+              
             }
 
             &__plot {
