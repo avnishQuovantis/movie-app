@@ -1,9 +1,11 @@
+@import "../scss/abstract/mixins";
+
 * {
     box-sizing: border-box;
 }
 .menuContainer {
     height: 90vh;
-    width: 25vw;
+    width: fit-content;
     opacity: 0;
     position: fixed;
     left: -25vw;
@@ -20,11 +22,14 @@
         border-radius: 1rem;
         transform: all 0.3s ease-in;
         margin: auto;
-        // border: 1px solid silver;
+        @include respond(phone){
+            display:flex;
+            justify-content:center
+        }
         &:hover {
             filter: brightness(120%);
         }
-
+        
         &__icon {
             font-size: 2.5rem;
             margin: auto;
@@ -34,10 +39,24 @@
             padding: 0.2rem 1rem;
             border: 2px solid whitesmoke;
             background: #111111;
+            
+            @include respond(phone){
+                padding:0.2rem 0.4rem;
+                font-size:0.9rem;
+                border:4px solid;
+                text-align:center
+            }
         }
         &__text {
             text-align: center;
             font-size: 1.2rem;
+           @include respond(tab-port){
+               font-size:0.9rem;
+           }
+            @include respond(phone){
+                display:none
+            }
+          
         }
     }
     &__content {
@@ -55,9 +74,17 @@
                 padding-bottom: 0.2rem;
                 border-left: 0.4rem solid lightblue;
                 background-image: linear-gradient(120deg, transparent 0%, transparent 89%, white 90%);
-                button {
+               & >span{
+                   @include respond(phone){
+                        display:none
+                   }
+               }
+                button{
                     margin-left: 1rem;
                     color: white;
+                    @include respond(phone){
+                        display:none;
+                    }
                 }
             }
             &:hover &--text {

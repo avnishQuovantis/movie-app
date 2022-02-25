@@ -1,9 +1,11 @@
 <div class="item">
   <div class="item__container">
-    <div
-      class="item__container__poster"
-      [style.background-image]="'url(' + item['Poster'] + ')'"
-    >
+    <div class="item__container__poster">
+      <img
+        [src]="item['Poster']"
+        alt=""
+        class="item__container__poster-image"
+      />
       <div class="item__container__poster-header">
         <h2>{{ item["Title"] }}</h2>
         <div>
@@ -56,7 +58,7 @@
             {{ item["Metascore"] }}
           </div>
         </div>
-        <button class="btn btn-dark" (click)="addWatchList(item)">
+        <button class="btn btn-dark item__container__content--right-watchlist" (click)="addWatchList(item)">
           <i class="fa-solid fa-bookmark"></i> Add to Watchlists
         </button>
       </div>

@@ -10,66 +10,57 @@
   </div>
   <div class="menuContainer__content">
     <div class="menuContainer__content-list" [routerLink]="['/']">
-      <div class="menuContainer__content-list--text">Home</div>
+      <div class="menuContainer__content-list--text"><i class="fa-solid fa-house"></i> <span> Home</span></div>
     </div>
     <div
       class="menuContainer__content-list"
       [routerLink]="['/catagories', 'latest']"
     >
-      <div class="menuContainer__content-list--text">Latest</div>
+      <div class="menuContainer__content-list--text"><i class="fa-solid fa-chart-line"></i><span> Latest</span></div>
     </div>
     <div
       class="menuContainer__content-list"
       [routerLink]="['/catagories', 'top-rated']"
     >
-      <div class="menuContainer__content-list--text">Top Rated</div>
+      <div class="menuContainer__content-list--text"><i class="fa-solid fa-star"></i><span> Top Rated</span></div>
     </div>
     <div class="menuContainer__content-list">
       <div
         class="menuContainer__content-list--text"
         [routerLink]="['/catagories/type/', 'movie']"
       >
-        Movies
-        <button class="btn" (click)="openSubMenu('movieStatus')">
-          <i class="fa-solid fa-chevron-right"></i>
-        </button>
+      <i class="fa-solid fa-clapperboard"></i><span> Movies</span>
       </div>
-      <ul
-        class="menuContainer__content-list--items"
-        [ngClass]="{ subMenu: moviesStatus }"
-      >
-        <li>Latest</li>
-        <li>top rated</li>
-        <li>Most Popular</li>
-        <li>Browse By Catagory</li>
-      </ul>
+      
     </div>
     <div
       class="menuContainer__content-list"
       [routerLink]="['/catagories/type/', 'series']"
     >
       <div class="menuContainer__content-list--text">
-        Tv Series
-        <button class="btn" (click)="openSubMenu('seriesStatus')">
-          <i class="fa-solid fa-chevron-right"></i>
-        </button>
+        <i class="fa-solid fa-tv"></i> <span> Tv Series</span>
+       
       </div>
-      <ul
-        class="menuContainer__content-list--items"
-        [ngClass]="{ subMenu: seriesStatus }"
-      >
-        <li>Latest</li>
-        <li>top rated</li>
-        <li>Most Popular</li>
-        <li>Browse By Catagory</li>
-      </ul>
+     
     </div>
     <div class="menuContainer__content-list">
       <div
         class="menuContainer__content-list--text"
         [routerLink]="['/catagories/catagory']"
       >
-        <span><i class="fa-solid fa-list"></i> Catagory</span>
+      <i class="fa-solid fa-list"></i> <span> Catagory  <button class="btn" (click)="openSubMenu('seriesStatus')">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button></span>
+
+      <ul
+      class="menuContainer__content-list--items"
+      [ngClass]="{ subMenu: seriesStatus }"
+    >
+      <li>Latest</li>
+      <li>top rated</li>
+      <li>Most Popular</li>
+      <li>Browse By Catagory</li>
+    </ul>
       </div>
     </div>
   </div>
