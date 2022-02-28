@@ -7,7 +7,13 @@ export class AuthenticationService {
   user = new BehaviorSubject<any>(null);
   private tokenExpirationTime: any;
   constructor(private http: HttpClient) {}
-
+  isAuthenticated() {
+    if (this.user == null) {
+      return false;
+    } else {
+      return true;
+    }
+  }
   login(email, password) {
     return this.http
       .post('http://localhost:9000/login', { email, password })

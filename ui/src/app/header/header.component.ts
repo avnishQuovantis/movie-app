@@ -23,7 +23,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.authService.user.subscribe((user) => {
       this.user = user;
-      console.log(user);
+
       this.watchist = user.list;
     });
     console.log(this.searchItem);
@@ -38,7 +38,6 @@ export class HeaderComponent implements OnInit {
     this.menuService.menuStatus.next(!menu);
   }
   clickSearch() {
-    console.log(this.searchItem);
     this.menuService.searchService.next(this.searchItem);
     this.router.navigate(['/search', this.searchItem]);
   }

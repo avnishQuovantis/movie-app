@@ -14,20 +14,20 @@
     </div>
     <div
       class="menuContainer__content-list"
-      [routerLink]="['/catagories', 'latest']"
+      [routerLink]="['/catagorieslist', 'latest']"
     >
       <div class="menuContainer__content-list--text"><i class="fa-solid fa-chart-line"></i><span> Latest</span></div>
     </div>
     <div
       class="menuContainer__content-list"
-      [routerLink]="['/catagories', 'top-rated']"
+      [routerLink]="['/catagorieslist', 'top-rated']"
     >
       <div class="menuContainer__content-list--text"><i class="fa-solid fa-star"></i><span> Top Rated</span></div>
     </div>
     <div class="menuContainer__content-list">
       <div
         class="menuContainer__content-list--text"
-        [routerLink]="['/catagories/type/', 'movie']"
+        [routerLink]="['/type', 'movie']"
       >
       <i class="fa-solid fa-clapperboard"></i><span> Movies</span>
       </div>
@@ -35,7 +35,7 @@
     </div>
     <div
       class="menuContainer__content-list"
-      [routerLink]="['/catagories/type/', 'series']"
+      [routerLink]="['/type', 'series']"
     >
       <div class="menuContainer__content-list--text">
         <i class="fa-solid fa-tv"></i> <span> Tv Series</span>
@@ -46,7 +46,7 @@
     <div class="menuContainer__content-list">
       <div
         class="menuContainer__content-list--text"
-        [routerLink]="['/catagories/catagory']"
+        [routerLink]="['/catagory']"
       >
       <i class="fa-solid fa-list"></i> <span> Catagory  <button class="btn" (click)="openSubMenu('seriesStatus')">
         <i class="fa-solid fa-chevron-right"></i>

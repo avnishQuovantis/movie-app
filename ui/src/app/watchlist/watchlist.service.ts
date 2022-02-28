@@ -34,11 +34,10 @@ export class WatchListService {
     let newItem = this.watchlist.find((obj) => {
       return obj['id'] == item['id'];
     });
-    console.log(newItem);
+
     if (this.userId) {
       if (!newItem) {
         this.watchlist.push(item);
-        console.log('inside addto watch');
 
         this.datafetch
           .addWatchlist(this.watchlist, this.userId)
@@ -55,13 +54,11 @@ export class WatchListService {
     let newWatchlist = this.watchlist.filter((obj) => {
       return obj['id'] != id;
     });
-    console.log('new Watchlist', id, newWatchlist);
+
     this.watchlist = newWatchlist;
     this.datafetch
       .DeleteFromWatchlist(this.userId, this.watchlist)
-      .subscribe((wathlist) => {
-        console.log(wathlist);
-      });
+      .subscribe((wathlist) => {});
     this.watchListChange.next(this.watchlist.slice());
   }
   getWatchListFromServer() {
@@ -73,7 +70,6 @@ export class WatchListService {
         })
       )
       .subscribe((list) => {
-        console.log(list);
         this.list = list;
         this.watchlist = list['watchlist'];
 

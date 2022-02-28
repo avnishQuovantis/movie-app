@@ -25,6 +25,7 @@ export class DataFetchService {
     return this.http.get('http://localhost:9000/type/' + type);
   }
   getItem(id) {
+    console.log(id);
     return this.http.get('http://localhost:9000/details/' + id);
   }
   getSearchItem(search) {

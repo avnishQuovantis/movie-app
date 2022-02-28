@@ -28,10 +28,7 @@ export class HomeListComponent implements OnInit {
   ngOnInit(): void {
     let start = this.currentPage;
     let end = this.currentPage + 5;
-    console.log(this.data);
-
     this.mainData = this.data.slice(start, end);
-    console.log('start ' + start + ' end ' + end);
   }
   prevousSlide() {
     this.currentPage =
@@ -43,7 +40,6 @@ export class HomeListComponent implements OnInit {
       this.currentPage - 5 <= 0
         ? this.currentPage + 5
         : this.currentPage + (this.data.length % 5);
-    console.log('prevous slide start ' + this.currentPage + ' end ' + end);
 
     this.mainData = this.data.slice(this.currentPage, end);
   }

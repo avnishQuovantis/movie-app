@@ -13,9 +13,7 @@ export class SearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.menu.searchService.subscribe((search) => {
-      console.log(search);
       this.dataFetch.getSearchItem(search).subscribe((searchItems) => {
-        console.log(searchItems);
         this.searchItem = searchItems['data'];
       });
     });

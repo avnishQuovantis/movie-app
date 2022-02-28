@@ -19,14 +19,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.data = this.homeService.getAllData();
     this.subscription = this.homeService.changeData.subscribe((newData) => {
       this.data = newData;
-      console.log(newData);
-
-      // console.log(this.data);
     });
     this.timeout = setInterval(() => {
       this.timer =
         this.timer == this.data['poster'].length - 1 ? 0 : this.timer + 1;
-      console.log(this.timer, this.data['poster'][this.timer]['Poster']);
     }, 4000);
   }
   ngOnDestroy(): void {
