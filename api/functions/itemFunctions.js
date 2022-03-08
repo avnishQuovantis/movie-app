@@ -7,12 +7,10 @@ function searchItem(req, res, next) {
         let items = data.filter(obj => {
             return obj["Title"].toLowerCase().includes(searchItem.toLowerCase())
         })
-        console.log(items);
         res.status(200).json({ data: items })
     } catch (err) {
         res.status(500).json({ data: null, message: err.message })
     }
-
 }
 
 function catagoryItems(req, res) {
@@ -21,8 +19,6 @@ function catagoryItems(req, res) {
         let item = data.filter(obj => {
             return obj.type == id
         })
-
-        // console.log("catagory", item);
         res.status(200).json({ data: item, message: "item is found" })
     } catch (err) {
         res.status(500).json({ data: null, message: err.message })
@@ -31,7 +27,6 @@ function catagoryItems(req, res) {
 function catagoryGenre(req, res) {
     try {
         let { id } = req.params
-        console.log(id);
         let newData = data.filter(obj => {
             return obj['Genre'].toLowerCase().includes(id)
         })
@@ -43,7 +38,6 @@ function catagoryGenre(req, res) {
 
 function moviesSeriesHome(req, res) {
     let { id } = req.params;
-    console.log(id);
     id = id.toLowerCase()
     let newData = { 'poster': [], 'latest': [], 'top-rated': [], 'popular': [] }
     for (let i = 0; i < data.length; i++) {
@@ -60,26 +54,18 @@ function moviesSeriesHome(req, res) {
             newData['popular'].push(data[i])
         }
     }
-    console.log(newData);
     res.status(200).json({ data: newData })
 }
 
-function moviesCatagories(req, res) {
-
-}
 function getItemDetails(req, res, next) {
     try {
         let { id } = req.params
-        console.log(id);
         let item = data.find(obj => {
             return id == obj.id
         })
-        console.log(item);
         if (item) {
-            console.log(item);
             res.status(200).json({ data: item, message: "item is found" })
         } else {
-            console.log(item);
             res.status(404).json({ data: null, message: "item not found" })
         }
     } catch (err) {
@@ -133,14 +119,11 @@ function Trend(req, res) {
 
 async function addWatchList(req, res) {
     const { id, watchlist } = req.body
-    console.log('inside wathclist ');
     try {
         await userModel.findByIdAndUpdate(id, { list: { watchlist: watchlist } })
         let watchlistItems = await userModel.findById(id)
-        console.log("watchlist items after updater ", watchlistItems['list']);
         res.status(200).json({ watchlist: watchlistItems.list })
     } catch (err) {
-        console.log(err.message);
         res.status(500).json({ error: err.message })
 
     }
@@ -148,28 +131,20 @@ async function addWatchList(req, res) {
 }
 async function getWatchlist(req, res) {
     const { id } = req.params
-    console.log(id);
     try {
-
         const list = await userModel.findById(id).select("list")
-        console.log(list);
         res.status(200).json({ data: list })
 
     } catch (err) {
-        console.log(err);
         res.status(500).json({ data: null })
     }
 
 }
 async function deleteFromWatchList(req, res) {
     const { id, watchlist } = req.body;
-
-    console.log(id);
     try {
-        console.log(watchlist);
         await userModel.findByIdAndUpdate(id, { "list": { "watchlist": watchlist } })
         const newWatchList = await userModel.findById(id).select("list")
-        console.log(newWatchList)
         res.status(200).json({ data: newWatchList })
     }
     catch (err) {

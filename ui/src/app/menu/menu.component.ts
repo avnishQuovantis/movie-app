@@ -9,8 +9,7 @@ import { MenuService } from './menu.service';
 })
 export class MenuComponent implements OnInit {
   menuStatus = false;
-  moviesStatus = false;
-  seriesStatus = false;
+  catagoryStatus = false;
   user = null;
   constructor(
     private menuService: MenuService,
@@ -25,11 +24,7 @@ export class MenuComponent implements OnInit {
       this.user = user;
     });
   }
-  openSubMenu(status) {
-    if (status === 'movieStatus') {
-      this.moviesStatus = !this.moviesStatus;
-    } else {
-      this.seriesStatus = !this.seriesStatus;
-    }
+  openSubMenu() {
+    this.catagoryStatus = !this.catagoryStatus;
   }
 }

@@ -23,7 +23,6 @@ const handleErrors = (err) => {
         //loop through error object using Object.Values 
         // console.log(err.message);
         Object.values(err.errors).forEach(({ properties }) => {
-
             errors[properties.path] = properties.message
         })
     }
@@ -32,11 +31,9 @@ const handleErrors = (err) => {
 async function protectedRoute(req, res, next) {
     try {
         let decryptedToken = await jwt.verify(req.cookies.login, JWT_KEY)
-        console.log();
         if (decryptedToken) {
             let userId = decryptedToken.id
             req.userId = userId
-            console.log("user id in req", req.userId);
             next()
         } else {
             res.status(404).json({ userData: req.user, message: "please login first" })
@@ -53,16 +50,14 @@ function createToken(id) {
 
 
 function moreThanRating(data, criteria, rating) {
-    let newData = data.filter(obj => {
+    return data.filter(obj => {
         return obj[criteria] >= rating
     })
-    return newData
 }
 function lessThanRating(data, criteria, rating) {
-    let newData = data.filter(obj => {
+    return data.filter(obj => {
         return obj[criteria] <= rating
     })
-    return newData
 }
 
 module.exports = { handleErrors, createToken, protectedRoute, moreThanRating, lessThanRating }

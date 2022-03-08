@@ -10,58 +10,64 @@
   </div>
   <div class="menuContainer__content">
     <div class="menuContainer__content-list" [routerLink]="['/']">
-      <div class="menuContainer__content-list--text"><i class="fa-solid fa-house"></i> <span> Home</span></div>
+      <div class="menuContainer__content-list--text">
+        <i class="fa-solid fa-house"></i> <span> Home</span>
+      </div>
     </div>
     <div
       class="menuContainer__content-list"
       [routerLink]="['/catagorieslist', 'latest']"
     >
-      <div class="menuContainer__content-list--text"><i class="fa-solid fa-chart-line"></i><span> Latest</span></div>
+      <div class="menuContainer__content-list--text">
+        <i class="fa-solid fa-chart-line"></i><span> Latest</span>
+      </div>
     </div>
     <div
       class="menuContainer__content-list"
       [routerLink]="['/catagorieslist', 'top-rated']"
     >
-      <div class="menuContainer__content-list--text"><i class="fa-solid fa-star"></i><span> Top Rated</span></div>
+      <div class="menuContainer__content-list--text">
+        <i class="fa-solid fa-star"></i><span> Top Rated</span>
+      </div>
     </div>
     <div class="menuContainer__content-list">
       <div
         class="menuContainer__content-list--text"
         [routerLink]="['/type', 'movie']"
       >
-      <i class="fa-solid fa-clapperboard"></i><span> Movies</span>
+        <i class="fa-solid fa-clapperboard"></i><span> Movies</span>
       </div>
-      
     </div>
-    <div
-      class="menuContainer__content-list"
-      [routerLink]="['/type', 'series']"
-    >
+    <div class="menuContainer__content-list" [routerLink]="['/type', 'series']">
       <div class="menuContainer__content-list--text">
         <i class="fa-solid fa-tv"></i> <span> Tv Series</span>
-       
       </div>
-     
     </div>
     <div class="menuContainer__content-list">
       <div
         class="menuContainer__content-list--text"
         [routerLink]="['/catagory']"
       >
-      <i class="fa-solid fa-list"></i> <span> Catagory  <button class="btn" (click)="openSubMenu('seriesStatus')">
-        <i class="fa-solid fa-chevron-right"></i>
-      </button></span>
-
-      <ul
-      class="menuContainer__content-list--items"
-      [ngClass]="{ subMenu: seriesStatus }"
-    >
-      <li>Latest</li>
-      <li>top rated</li>
-      <li>Most Popular</li>
-      <li>Browse By Catagory</li>
-    </ul>
+        <i class="fa-solid fa-list"></i>
+        <span> Catagory</span>
+        <button class="btn" (click)="openSubMenu()">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
       </div>
+      <ul
+        class="menuContainer__content-list--items"
+        [ngClass]="{ subMenu: catagoryStatus }"
+      >
+        <!-- <li [routerLink]="['genre', 'Action']">action</li>
+        <li [routerLink]="['genre', 'Adventure']">adventure</li>
+        <li [routerLink]="['genre', 'Romantic']">romantic</li>
+        <li [routerLink]="['genre', 'Sci-Fi']">Sci-fi</li>
+        <li [routerLink]="['genre', 'Fantasy']">Fantasy</li>
+        <li [routerLink]="['genre', 'Drama']">drama</li>
+        <li [routerLink]="['genre', 'Thriller']">thriller</li>
+        <li [routerLink]="['genre', 'Horror']">horror</li>
+        <li [routerLink]="['genre', 'Comedy']">Comedy</li> -->
+      </ul>
     </div>
   </div>
 </div>
