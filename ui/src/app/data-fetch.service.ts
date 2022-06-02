@@ -50,4 +50,29 @@ export class DataFetchService {
       watchlist,
     });
   }
+  addRating(rating, comment, movieId, userId) {
+    console.log(
+      'rating ',
+      rating,
+      'movie id ',
+      movieId,
+      'comment',
+      comment,
+      'user id ',
+      userId
+    );
+
+    return this.http.post('http://localhost:9000/rating', {
+      rating,
+      movieId,
+      userId,
+      comment,
+    });
+    // .subscribe((data) => {
+    //   console.log('submit review data is ', data);
+    // });
+  }
+  getComments(movieId) {
+    return this.http.get('http://localhost:9000/comments/' + movieId);
+  }
 }

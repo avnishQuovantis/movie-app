@@ -1,4 +1,5 @@
 const userModel = require("../database/userModel")
+const ratingModel = require("../database/ratingModel")
 const { moreThanRating, lessThanRating } = require("./helperFn")
 const data = require("../data")
 function searchItem(req, res, next) {
@@ -151,4 +152,41 @@ async function deleteFromWatchList(req, res) {
         console.log(err);
     }
 }
-module.exports = { searchItem, getItemDetails, deleteFromWatchList, getWatchlist, catagoryItems, Trend, moviesSeriesHome, homeItems, addWatchList, latestItems, catagories, catagoryGenre }
+
+async function addRating(req, res) {
+    const { userId, movieId, comment, rating } = req.body;
+    console.log('add rating body ', req.body);
+    try {
+        const userr = await ratingModel.findOne({ $and: [{ userId: userId }, { movieId: movieId }] })
+        console.log("userr in addrating ", userr);
+        if (userr == [] || userr == null) {
+            const user = await userModel.findById(userId).select('name')
+            console.log("user", user);
+
+
+            const dataResp = await ratingModel.create({ userId: userId, name: user['name'], movieId: movieId, comment: comment, rating })
+            console.log('movie like response', dataResp);
+            res.json({ data: dataResp })
+        } else {
+            await ratingModel.findByIdAndUpdate(userr._id, { comment: comment, rating: rating }, { new: true })
+            let dataa = await ratingModel.findOne({ $and: [{ userId: userId }, { movieId: movieId }] })
+            console.log("dataa ", dataa);
+            res.json({ data: dataa })
+        }
+    } catch (error) {
+        console.log('error', error);
+        res.json({ data: null, message: error.message })
+    }
+}
+async function getComments(req, res) {
+    const { id } = req.params
+    try {
+        let comments = await ratingModel.find({ movieId: id })
+        console.log('comments ', comments);
+        res.json({ data: comments })
+
+    } catch (error) {
+        res.status(404).json({ data: null })
+    }
+}
+module.exports = { addRating, searchItem, getItemDetails, deleteFromWatchList, getWatchlist, catagoryItems, Trend, moviesSeriesHome, homeItems, addWatchList, latestItems, catagories, catagoryGenre, getComments }

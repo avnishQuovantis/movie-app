@@ -33,20 +33,20 @@
             transform: translateY(-50%);
             z-index: 60;
             padding: 0.5rem;
-            @include respond(phone){
-                font-size:1rem;
+            @include respond(phone) {
+                font-size: 1rem;
             }
         }
         &--prevous {
             left: 1rem;
-            @include respond(phone){
-                left:0.5rem;
+            @include respond(phone) {
+                left: 0.5rem;
             }
         }
         &--next {
             right: 1rem;
-            @include respond(phone){
-                right:0.5rem;
+            @include respond(phone) {
+                right: 0.5rem;
             }
         }
         &_item {
@@ -59,8 +59,8 @@
             border-radius: 1rem;
             animation: fadeIn 0.6s ease-in;
             transition: all 0.3s;
-            @include respond(phone){
-                height:7rem;
+            @include respond(phone) {
+                height: 7rem;
             }
             &:hover {
                 transform: scale(1.04);
@@ -74,8 +74,8 @@
                 font-size: 1.5rem;
                 color: white;
                 background-color: rgba(0, 0, 0, 0.7);
-                @include respond(phone){
-                    font-size:0.8rem;
+                @include respond(phone) {
+                    font-size: 0.8rem;
                 }
             }
             &-details {
@@ -87,12 +87,12 @@
                 width: 100%;
                 font-size: 0.9rem !important;
                 height: 30%;
-                @include respond(phone){
-                    height:fit-content;
+                @include respond(phone) {
+                    height: fit-content;
                 }
-                & > *{
-                    @include respond(phone){
-                        font-size:0.5rem;
+                & > * {
+                    @include respond(phone) {
+                        font-size: 0.5rem;
                     }
                 }
                 &--title {

@@ -44,7 +44,7 @@
         </div>
         <div class="item__container__content--right-imdbRating">
           <div class="item__container__content--right-imdbRating-left">
-            Imdb
+            IMDb
           </div>
           <div class="item__container__content--right-imdbRating-right">
             <i class="fa-solid fa-star"></i> {{ item["imdbRating"] }}/10
@@ -58,10 +58,51 @@
             {{ item["Metascore"] }}
           </div>
         </div>
-        <button class="btn btn-dark item__container__content--right-watchlist" (click)="addWatchList(item)">
+        <button
+          class="btn btn-dark item__container__content--right-watchlist"
+          (click)="addWatchList(item)"
+        >
           <i class="fa-solid fa-bookmark"></i> Add to Watchlists
+        </button>
+        <button
+          class="btn btn-outline-primary item__container__content--right-rate"
+          (click)="openRatingModal()"
+        >
+          {{ comment == {} || user == {} ? "Rate" : "Edit" }}
+          <i class="fa-solid fa-star"></i>
         </button>
       </div>
     </div>
+    <div class="item__container__comments">
+      <div
+        class="item__container__comments--heading"
+        [routerLink]="[item['id'] + '/reviews']"
+      >
+        Comments
+        <i class="fa-solid fa-chevron-right"></i>
+      </div>
+      <div
+        class="item__container__comments--content"
+        *ngIf="comments.length > 0"
+      >
+        <div class="item__container__comments--content-rating">
+          <div>Top Review</div>
+          <span
+            ><i class="fa-solid fa-star"></i> {{ comments[0]["rating"] }}</span
+          >
+        </div>
+        <!-- <div class="item__container__comments--content-title">
+          {{ comments[0]["comment"] }}
+        </div> -->
+        <div class="item__container__comments--content-user">
+          <div>{{ comments[0]["name"] }}</div>
+          <span>{{ comments[0]["createdAt"] | date }}</span>
+        </div>
+        <div class="item__container__comments--content-comment">
+          {{ comments[0]["comment"] }}
+        </div>
+      </div>
+    </div>
   </div>
+  <rating-modal [item]="item" [comment]="comment"></rating-modal>
 </div>

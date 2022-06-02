@@ -14,6 +14,7 @@ import { MenuComponent } from './menu/menu.component';
 import { TypeComponent } from './type/type.component';
 import { WatchlistComponent } from './watchlist/watchlist.component';
 import { SharedModule } from './Shared/shared.module';
+import { ReviewsComponent } from './Reviews/reviews.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,6 +23,7 @@ import { SharedModule } from './Shared/shared.module';
     MenuComponent,
 
     WatchlistComponent,
+    ReviewsComponent,
   ],
   imports: [
     SharedModule,

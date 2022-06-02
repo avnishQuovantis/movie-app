@@ -15,6 +15,8 @@ import { CatagoryComponent } from './catagory/catagory.component';
 import { GenreComponent } from './genre/genre.component';
 import { CatagoriesListComponent } from './catagories-list/catagories-list.component';
 import { AuthGaurd } from './authentication/auth-gaurd.service';
+import { ReviewsComponent } from './Reviews/reviews.component';
+import { ReviewsResolver } from './Reviews/reviews-resolver.service';
 const routes: Routes = [
   {
     path: '',
@@ -69,6 +71,11 @@ const routes: Routes = [
     canActivate: [AuthGaurd],
     loadChildren: () =>
       import('./profile/profile.module').then((m) => m.ProfileModule),
+  },
+  {
+    path: 'item/:id/reviews',
+    component: ReviewsComponent,
+    resolve: [ReviewsResolver],
   },
   { path: '**', redirectTo: '/' },
 ];

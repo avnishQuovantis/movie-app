@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken")
 const { JWT_KEY } = require("./secrets")
 const cookieParser = require("cookie-parser")
 const { login, signUp, getUser, updateUser } = require("./functions/userFunctions")
-const { getItem, searchItem, catagories, catagoryGenre, moviesSeriesHome, catagoryItems, homeItems, addWatchList, Trend, getItemDetails, getWatchlist, deleteFromWatchList } = require("./functions/itemFunctions")
+const { searchItem, catagories, catagoryGenre, moviesSeriesHome, catagoryItems, homeItems, addRating, addWatchList, Trend, getItemDetails, getWatchlist, deleteFromWatchList, getComments } = require("./functions/itemFunctions")
 const data =
     app.use(express.static("/image"))
 //
@@ -30,6 +30,8 @@ app.patch("/watchlist/delete", deleteFromWatchList)
 
 app.patch("/updateUser", updateUser)
 app.post("/user", getUser)
+app.post("/rating", addRating)
+app.get("/comments/:id", getComments)
 // app.post("/addCart", editCart)
 app.listen("9000", () => {
     console.log("9000 server is runnign");

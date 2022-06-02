@@ -117,11 +117,13 @@
                     }
                     &-left {
                         background-color: yellow;
-                        border: 2px solid;
-                        font-weight: 500;
+                        border: 0px solid;
+                        font-weight: 700;
                         color: black;
                         margin-right: 0.2rem;
-                        padding: 0 0.2rem;
+                        padding: 0.1rem 0.4rem;
+                        border-radius: 0.2rem;
+                        font-size: 1.5vmax !important;
                     }
                     &-right {
                         display: flex;
@@ -134,16 +136,16 @@
                 }
                 &-watchlist {
                     @include respond(phone) {
-                        font-size: 0.7rem;
+                        font-size: 0.6rem;
                     }
                 }
                 &-Metascore {
                     display: flex;
                     font-size: 1.2rem !important;
                     width: fit-content;
-                    border: 2px solid yellow;
+                    // border: 2px solid yellow;
                     color: white;
-                    border-radius: 0.2rem;
+                    border-radius: 0.5rem;
                     & * {
                         @include respond(phone) {
                             font-size: 0.7rem;
@@ -152,11 +154,77 @@
                     &-left {
                         background-color: black;
                         padding: 0.3rem;
+                        border-top-left-radius: 0.5rem;
+                        border-bottom-left-radius: 0.5rem;
                     }
 
                     &-right {
                         padding: 0.3rem;
                         background-color: yellowgreen;
+                        border-top-right-radius: 0.5rem;
+                        border-bottom-right-radius: 0.5rem;
+                    }
+                }
+                &-rate {
+                    margin-top: 0.5rem;
+                    display: block;
+                    outline: none;
+                }
+            }
+        }
+        &__comments {
+            width: 60%;
+            padding: 0.8rem;
+            &--heading {
+                margin-bottom: 1rem;
+                color: black;
+                font-size: 1.8rem;
+                font-weight: 500;
+                border-left: 5px solid yellow;
+                padding: 0 0.5rem;
+                border-radius: 2px;
+                transition: all 0.5s ease-in-out;
+                &:hover i {
+                    color: yellow;
+                }
+            }
+            &--content {
+                width: 100%;
+                height: fit-content;
+                padding: 0.8rem;
+                box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+                &-rating {
+                    width: 60%;
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 0.5rem;
+                    & > div {
+                        font-size: 1.3vmax;
+                        font-weight: bold;
+                        transform: skew(-5deg);
+                        padding: 0.1rem 1rem;
+                        border-radius: 0.3rem;
+                        background-color: rgb(255, 221, 0);
+                    }
+                    & i {
+                        color: yellow;
+                    }
+                }
+                &-title {
+                    font-size: 2.2vmax;
+                    font-weight: bold;
+                }
+                &-user {
+                    display: flex;
+                    width: 100%;
+                    align-items: center;
+                    & > div {
+                        font-size: 1.5vmax;
+                        font-weight: 500;
+                        margin-right: 1rem;
+                    }
+                    & > span {
+                        color: gray;
                     }
                 }
             }

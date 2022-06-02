@@ -4,11 +4,10 @@ import {
   Resolve,
   RouterStateSnapshot,
 } from '@angular/router';
-import { DataFetchService } from '../data-fetch.service';
-import { ItemComponent } from './item.component';
-import { ItemService } from './item.service';
+
+import { ItemService } from '../item/item.service';
 @Injectable({ providedIn: 'root' })
-export class ItemResolver implements Resolve<any> {
+export class ReviewsResolver implements Resolve<any> {
   constructor(private itemService: ItemService) {}
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     let id = route.params['id'];
